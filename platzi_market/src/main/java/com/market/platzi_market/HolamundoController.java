@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 
-//endpoint--> localhost:8080/holamundo/hola
+//endpoint--> localhost:8080/platzi-market/api/holamundo/hola
 @RestController
 @RequestMapping("/holamundo")
 public class HolamundoController {

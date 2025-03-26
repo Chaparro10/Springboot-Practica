@@ -1,4 +1,4 @@
-package com.market.platzi_market;
+package com.market.platzi_market.web.controllers;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

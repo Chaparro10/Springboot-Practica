@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity()
 @Table(name = "compras")
@@ -23,5 +24,12 @@ public class compra {
     private LocalDateTime updatedAt;
     private Double subtotal;
     private Double total;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", insertable = false,updatable = false)
+    private clientes clientes;
+
+    @OneToMany(mappedBy = "compras")
+    private List<detalle_compra> detalleCompras;
 
 }

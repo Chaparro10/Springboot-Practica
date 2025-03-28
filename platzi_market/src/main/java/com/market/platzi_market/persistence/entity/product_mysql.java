@@ -1,22 +1,20 @@
 package com.market.platzi_market.persistence.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 
-// Marca la clase como un documento de MongoDB
-@Document(collection = "products")
+@Entity()
 @Data()
 @AllArgsConstructor()
 @NoArgsConstructor()
-public class product {
+@Table(name = "product")
+public class product_mysql {
 
     @Id()
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer id_categoria;
@@ -25,10 +23,7 @@ public class product {
     private Integer total_stock;
     private  Boolean estado;
 
-
-    @ManyToOne
-    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
-    private categoria categoria;
-
-
 }
+
+
+

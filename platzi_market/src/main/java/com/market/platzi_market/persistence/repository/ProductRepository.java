@@ -30,4 +30,7 @@ public class ProductRepository {
     public void delete(Long idProducto){
         productCrudRepository.deleteById(idProducto);
     }
+    public boolean ExistProduct(Long id){
+        return  productCrudRepository.existsById(id);
+    }
 }

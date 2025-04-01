@@ -15,6 +15,7 @@ public class ProductService {
 
 
     public List<Product_mysql> getAll(){
+        System.out.println("Servicio"+productRepository.getAllProduct());
         return  productRepository.getAllProduct();
     }
 
@@ -28,5 +29,9 @@ public class ProductService {
 
     public void delete(Long idProducto){
         productRepository.delete(idProducto);
+    }
+
+    public  boolean ExistCategoria(Long id){
+        return productRepository.ExistProduct(id);
     }
 }

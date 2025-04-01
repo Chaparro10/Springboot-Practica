@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor()
 @NoArgsConstructor()
 @Table(name = "clientes")
-public class clientes {
+public class Clientes {
 
 
 
@@ -28,7 +28,7 @@ public class clientes {
         private String email;
 
         @OneToMany(mappedBy = "clientes")
-        private List<compra> compras;
+        private List<Compra> compras;
 
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
 @Entity()
 @Data()
 @Table(name = "categorias")
-public class categoria {
+public class Categoria {
 
 
     @Id()
@@ -19,5 +19,5 @@ public class categoria {
     private Integer estado;
 
      @OneToMany(mappedBy = "categoria")
-    private List<product>productos;
+    private List<Product_mysql>productos;
 }

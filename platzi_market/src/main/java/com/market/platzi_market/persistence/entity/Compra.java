@@ -1,0 +1,35 @@
+package com.market.platzi_market.persistence.entity;
+
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Entity()
+@Table(name = "compras")
+@Data()
+public class Compra {
+
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Integer id_cliente;
+    private Integer id_metogopago;
+    private String comentario;
+    private Integer estado;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private Double subtotal;
+    private Double total;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", insertable = false,updatable = false)
+    private Clientes clientes;
+
+    @OneToMany(mappedBy = "compras")
+    private List<Detalle_compra> detalleCompras;
+
+}

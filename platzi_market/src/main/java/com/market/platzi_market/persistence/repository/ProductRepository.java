@@ -2,10 +2,13 @@ package com.market.platzi_market.persistence.repository;
 
 import com.market.platzi_market.persistence.crud.ProductCrudRepository;
 import com.market.platzi_market.persistence.entity.Product_mysql;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 
+
+@Repository
 public class ProductRepository {
     private ProductCrudRepository productCrudRepository;
 
@@ -16,5 +19,13 @@ public class ProductRepository {
 
     public List<Product_mysql> getProductsByCategory(int id){
         return productCrudRepository.getByCategoria(id);
+    }
+
+    public Product_mysql  save (Product_mysql product_mysql){
+            return productCrudRepository.save(product_mysql);
+    }
+
+    public void delete(Long idProducto){
+        productCrudRepository.deleteById(idProducto);
     }
 }

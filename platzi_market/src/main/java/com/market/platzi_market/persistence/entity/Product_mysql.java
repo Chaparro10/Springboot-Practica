@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data()
 @AllArgsConstructor()
 @NoArgsConstructor()
-@Table(name = "product")
+@Table(name = "products")
 public class Product_mysql {
 
     @Id()
@@ -18,7 +18,10 @@ public class Product_mysql {
     private Long id;
     private String name;
     private Integer id_categoria;
+    @Column(name = "codeBar")
     private String codeBar;
+
+    @Column(name = "precioVenta")
     private Double precioVenta;
     private Integer total_stock;
     private  Boolean estado;

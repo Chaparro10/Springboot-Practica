@@ -3,6 +3,7 @@ package com.market.platzi_market.web.controllers;
 
 import com.market.platzi_market.domain.service.ProductService;
 import com.market.platzi_market.persistence.entity.Product_mysql;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 @RestController()
 @RequestMapping("/product")
+@Tag(name = "Productos", description = "API para gestión de productos")
 public class ProductController {
 
     @Autowired

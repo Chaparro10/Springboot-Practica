@@ -2,6 +2,7 @@ package com.market.platzi_market.persistence.repository;
 
 import com.market.platzi_market.persistence.crud.ProductCrudRepository;
 import com.market.platzi_market.persistence.entity.Product_mysql;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Repository
 public class ProductRepository {
+    @Autowired
     private ProductCrudRepository productCrudRepository;
 
     //obtener todos los productos

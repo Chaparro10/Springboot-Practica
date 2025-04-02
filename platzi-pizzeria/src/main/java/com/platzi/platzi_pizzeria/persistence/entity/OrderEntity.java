@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "pizza_order")
@@ -31,4 +32,14 @@ public class OrderEntity {
         @Column(nullable = false,columnDefinition = "CHAR(1)")
     private String method;
     private String additional_notes;
+
+
+    //Relacion Muchos a Uno con customer
+    @ManyToOne
+    @JoinColumn(name = "id_customer", insertable = false,updatable = false)
+    private CustomerEntity customersEntity;
+
+
+    @OneToMany(mappedBy = "orderEntity")
+    private List<OrderItemEntity> orderItemEntities;
 }

@@ -3,6 +3,8 @@ package com.platzi.platzi_pizzeria.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "customer")
 public class CustomerEntity {
@@ -16,4 +18,10 @@ public class CustomerEntity {
     private String email;
     @Column(nullable = false,length = 20)
     private String phone_number;
+
+
+    //Relacion uno a muchos con Order
+    @OneToMany(mappedBy = "customersEntity")
+    private List<OrderEntity> orderEntities;
+
 }

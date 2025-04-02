@@ -20,4 +20,17 @@ public class OrderItemEntity {
     private  Double quantity;
     @Column(nullable = false,columnDefinition = "Decimal(5,2)")
     private Double price;
+
+
+    //Relacion Muchos a uno con OrderEntity
+    @ManyToOne
+    @JoinColumn(name = "id_order",insertable = false,updatable = false)
+    private  OrderEntity orderEntity;
+
+
+    //Relacion One to One con PizzaEntity
+    @OneToOne
+    @JoinColumn(name = "id_pizza" , referencedColumnName = "id",insertable = false,updatable = false)
+    private PizzaEntity pizzaEntity;
+
 }

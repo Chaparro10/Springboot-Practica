@@ -2,11 +2,15 @@ package com.platzi.platzi_pizzeria.persistence.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
 @Entity
 @Table(name = "customer")
+@Data
+@ToString
 public class CustomerEntity {
 
     @Id

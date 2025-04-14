@@ -2,9 +2,13 @@ package com.platzi.platzi_pizzeria.persistence.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Table(name = "order_item")
+@Data
+@ToString
 public class OrderItemEntity {
 
     @Id

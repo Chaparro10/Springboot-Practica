@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/pizza")
 public class PizzaController {
-        @Autowired
+    @Autowired
     private  PizzaService pizzaService;
 
 //    @Autowired
@@ -58,5 +58,42 @@ public class PizzaController {
 
     }
 
+
+
+    /*--------------------------QUERY METHOD------------*/
+
+    @GetMapping("/available")
+    public List<PizzaEntity> getAllByAvailable(){
+        return this.pizzaService.getAllByAvailable();
+    }
+
+    @GetMapping("/available/{name}")
+    public List<PizzaEntity> getAllByAvailableAndName(@PathVariable String name){
+        return this.pizzaService.getAllByAvailableAndName(name);
+    }
+
+    @GetMapping("/available/petition")
+    public  List<PizzaEntity> getAllByAvailableTrueAndDescriptionContainingIgnoreCase(@RequestParam String description ){
+        return this.pizzaService.getAllByAvailableContainingDescription(description);
+    }
+    @GetMapping("/available/no")
+    public  List<PizzaEntity> getAllByAvailableTrueAndDescriptionNotContainingIgnoreCase(@RequestParam String description ){
+        return this.pizzaService.getAllByAvailableNotContainingDescription(description);
+    }
+
+
+    @GetMapping("/available/1")
+    public  PizzaEntity getPizza(@RequestParam String name ){
+        return this.pizzaService.getPizzaByName(name);
+    }
+
+    @GetMapping("/top/3")
+    public  List<PizzaEntity> getPizza3(){
+        return this.pizzaService.getTop3Pizza(20);
+    }
+    @GetMapping("/topMayor/3")
+    public  List<PizzaEntity> getPizza3Mayor(){
+        return this.pizzaService.getTop3PizzaMayor(20);
+    }
 
 }

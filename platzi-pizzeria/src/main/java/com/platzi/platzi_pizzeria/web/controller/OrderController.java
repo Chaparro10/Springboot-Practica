@@ -25,5 +25,22 @@ public class OrderController {
     }
 
 
+    /*-----------QUERY METHOD--------------*/
+    @GetMapping("/today")
+    public List<OrderEntity> getAllToday(){
+        return this.orderService.getTodayOrder();
+    }
+
+    @GetMapping("/todays")
+    public List<OrderEntity> getAllMToday(){
+        return this.orderService.getMTodayOrder();
+    }
+
+    @GetMapping("/outside")
+    public List<OrderEntity> getAllOutside(){
+        return this.orderService.getOrderOutside();
+    }
+
+
 
 }

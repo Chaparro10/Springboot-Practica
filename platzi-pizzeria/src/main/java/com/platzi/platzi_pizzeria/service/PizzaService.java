@@ -50,4 +50,36 @@ public class PizzaService {
 //        List<PizzaEntity> lista = this.jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(PizzaEntity.class));
 //        return lista;
 //    }
+
+
+
+
+    /*----------------------QUERY METHOD----------------------*/
+
+    public List<PizzaEntity> getAllByAvailable(){
+        return  this.pizzaRepository.findAllByAvailableTrueOrderByPrice();
+    }
+
+    public List<PizzaEntity> getAllByAvailableAndName(String name){
+        return this.pizzaRepository.findAllByAvailableTrueAndNameIgnoreCase(name);
+    }
+
+    public  List<PizzaEntity> getAllByAvailableContainingDescription(String description){
+        return this.pizzaRepository.findAllByAvailableTrueAndDescriptionContainingIgnoreCase(description);
+    }
+
+    public List<PizzaEntity> getAllByAvailableNotContainingDescription(String description){
+        return this.pizzaRepository.findAllByAvailableTrueAndDescriptionNotContainingIgnoreCase(description);
+    }
+
+    public PizzaEntity getPizzaByName(String name){
+        return this.pizzaRepository.findFirstByAvailableTrueAndNameIgnoreCase(name);
+    }
+
+    public  List<PizzaEntity> getTop3Pizza(double price){
+        return this.pizzaRepository.findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceDesc(price);
+    }
+    public List<PizzaEntity> getTop3PizzaMayor(double price){
+            return this.pizzaRepository.findTop3ByPriceGreaterThanEqualOrderByPriceDesc(price);
+    }
 }

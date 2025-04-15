@@ -1,11 +1,11 @@
 package com.platzi.platzi_pizzeria.persistence.repository;
 
 import com.platzi.platzi_pizzeria.persistence.entity.PizzaEntity;
-import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PizzaRepository  extends ListCrudRepository<PizzaEntity,Integer> {
+public interface PizzaRepository  extends JpaRepository<PizzaEntity,Integer> {
 
 
     /*-------------------QUERY METHOD-------------------------*/

@@ -4,6 +4,10 @@ package com.platzi.platzi_pizzeria.service;
 import com.platzi.platzi_pizzeria.persistence.entity.PizzaEntity;
 import com.platzi.platzi_pizzeria.persistence.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -82,4 +86,18 @@ public class PizzaService {
     public List<PizzaEntity> getTop3PizzaMayor(double price){
             return this.pizzaRepository.findTop3ByPriceGreaterThanEqualOrderByPriceDesc(price);
     }
+
+
+    /*------------------PAGINACION Y ORDENAMIENTO-------------*/
+    public Page<PizzaEntity> getAllPizzaPaginado(int page,int element){
+        Pageable pageRequest = PageRequest.of(page,element);
+        return this.pizzaRepository.findAll(pageRequest);
+    }
+
+
+    public Page<PizzaEntity> getAllPizzaPagOrdenado(int page,int element,String sort){
+        Pageable pageRequest = PageRequest.of(page,element, Sort.by(sort));
+        return this.pizzaRepository.findAll(pageRequest);
+    }
+
 }

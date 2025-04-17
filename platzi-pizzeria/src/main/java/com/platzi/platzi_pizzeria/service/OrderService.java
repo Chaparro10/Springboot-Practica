@@ -1,7 +1,9 @@
 package com.platzi.platzi_pizzeria.service;
 
 import com.platzi.platzi_pizzeria.persistence.entity.OrderEntity;
+import com.platzi.platzi_pizzeria.persistence.projection.OrderSummary;
 import com.platzi.platzi_pizzeria.persistence.repository.OrderRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,17 @@ public class OrderService {
             List<String> me = Arrays.asList(DELIVERY,CARRYOUT);
 
            return this.orderRepository.findAllByMethodIn(me);
+    }
+
+
+
+    /*-------------@Query sql nativos------------*/
+
+    public  List<OrderEntity> getOrderByCustomer(String id){
+        return this.orderRepository.findCustomerOrder(id);
+    }
+
+    public List<OrderSummary> findAllDetail(String id){
+        return this.orderRepository.findAllDetail(id);
     }
 }

@@ -1,19 +1,14 @@
 package com.platzi.platzi_pizzeria.persistence.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "pizza_order")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @ToString
 public class OrderEntity {

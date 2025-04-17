@@ -3,6 +3,7 @@ package com.platzi.platzi_pizzeria.service;
 
 import com.platzi.platzi_pizzeria.persistence.entity.PizzaEntity;
 import com.platzi.platzi_pizzeria.persistence.repository.PizzaRepository;
+import com.platzi.platzi_pizzeria.service.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,10 +12,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional //hacer toda la clase transactioanl
 public class PizzaService {
 
     //private  final JdbcTemplate jdbcTemplate;
@@ -99,5 +102,13 @@ public class PizzaService {
         Pageable pageRequest = PageRequest.of(page,element, Sort.by(sort));
         return this.pizzaRepository.findAll(pageRequest);
     }
+
+
+    /*@Query sql nativo*/
+    @Transactional
+    public void  updatePricePizza(UpdatePizzaPriceDto dto){
+        this.pizzaRepository.updatePrice(dto);
+    }
+
 
 }

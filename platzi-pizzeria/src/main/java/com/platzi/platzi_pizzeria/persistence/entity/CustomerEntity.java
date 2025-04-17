@@ -2,8 +2,7 @@ package com.platzi.platzi_pizzeria.persistence.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,8 +10,8 @@ import java.util.List;
 @Table(name = "customer")
 @Data
 @ToString
+@NoArgsConstructor
 public class CustomerEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,9 +22,7 @@ public class CustomerEntity {
     @Column(nullable = false,length = 20)
     private String phone_number;
 
-
     //Relacion uno a muchos con Order
     @OneToMany(mappedBy = "customersEntity")
     private List<OrderEntity> orderEntities;
-
 }

@@ -4,11 +4,11 @@ package com.platzi.platzi_pizzeria.web.controller;
 import com.platzi.platzi_pizzeria.persistence.entity.OrderEntity;
 import com.platzi.platzi_pizzeria.persistence.projection.OrderSummary;
 import com.platzi.platzi_pizzeria.service.OrderService;
+import com.platzi.platzi_pizzeria.service.dto.OrderByIdDTO;
+import com.platzi.platzi_pizzeria.service.dto.RandomOrderDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,6 +53,18 @@ public class OrderController {
     public List<OrderSummary> getAllOrderDetail(@RequestParam String id){
         return this.orderService.findAllDetail(id);
     }
+
+    @PostMapping("/random")
+    public ResponseEntity<Boolean> saveRandomOrder(@RequestBody RandomOrderDTO dto){
+        return ResponseEntity.ok(this.orderService.saveRandomOrder(dto));
+    }
+
+    @PostMapping("/orderrr")
+    public ResponseEntity<OrderEntity> getOrderById(@RequestBody OrderByIdDTO dto){
+        Integer id=dto.getId();
+        return ResponseEntity.ok(this.orderService.getOrderById(id));
+    }
+
 
 
 

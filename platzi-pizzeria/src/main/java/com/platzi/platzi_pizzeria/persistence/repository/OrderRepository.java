@@ -2,7 +2,9 @@ package com.platzi.platzi_pizzeria.persistence.repository;
 
 import com.platzi.platzi_pizzeria.persistence.entity.OrderEntity;
 import com.platzi.platzi_pizzeria.persistence.projection.OrderSummary;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -39,4 +41,11 @@ public interface OrderRepository extends ListCrudRepository<OrderEntity, Integer
             GROUP BY po.id,cu.name,po.date,pi.price,pi.`name`
             """, nativeQuery = true)
     List<OrderSummary> findAllDetail(@Param("id") String idOrder);
+
+
+    @Procedure(value = "TakeRandomPizzaOrder",outputParameterName = "orderTaken")
+    boolean saveRandomOrder(@Param("customer_id") String idCustomer,@Param("method") String method);
+
+    @Procedure(value = "getOrderById")
+    OrderEntity getOrderById(@Param("id") Integer id);
 }

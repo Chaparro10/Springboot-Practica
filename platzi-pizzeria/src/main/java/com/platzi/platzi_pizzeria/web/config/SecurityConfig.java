@@ -3,6 +3,7 @@ package com.platzi.platzi_pizzeria.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -17,7 +18,8 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable()).
                 cors(Customizer.withDefaults()).
                 authorizeHttpRequests(customizeRequest ->{
-            customizeRequest.anyRequest().authenticated();
+            customizeRequest.anyRequest().authenticated().
+                    requestMatchers(HttpMethod.GET,"/api/**").permitAll();
                 });
         return http.build();
     }

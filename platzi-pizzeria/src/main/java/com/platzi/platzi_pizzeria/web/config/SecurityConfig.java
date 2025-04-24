@@ -25,7 +25,8 @@ public class SecurityConfig {
                 cors(Customizer.withDefaults()).
                 authorizeHttpRequests(customizeRequest ->{
             customizeRequest
-                    .requestMatchers(HttpMethod.GET,"/api/**").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/api/**").hasAnyRole("ADMIN","CUSTOMER")
+                    .requestMatchers(HttpMethod.POST,"/api/**").hasRole("ADMIN")
                     .anyRequest().authenticated();
                 });
         return http.build();
@@ -38,7 +39,14 @@ public class SecurityConfig {
                 .password(passwordEncoder().encode("123"))
                 .roles("ADMIN")
                 .build();
-            return new InMemoryUserDetailsManager(admin);
+
+        UserDetails customer = User.builder()
+                .username("customer")
+                .password(passwordEncoder().encode("123"))
+                .roles("CUSTOMER")
+                .build();
+
+            return new InMemoryUserDetailsManager(admin,customer);
     }
 
     @Bean

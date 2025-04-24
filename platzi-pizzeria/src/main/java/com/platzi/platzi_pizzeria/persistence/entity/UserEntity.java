@@ -10,10 +10,13 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "User")
-public class User {
+public class UserEntity {
     @Id
     @Column(nullable = false,length = 20)
     private String username;
+
+    @Column(nullable = false,length = 20)
+    private String password;
     @Column(length = 50)
     private String email;
     @Column(nullable = false,columnDefinition = "TINYINT")

@@ -1,11 +1,10 @@
 package com.platzi.platzi_pizzeria.persistence.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +22,9 @@ public class UserEntity {
     private Boolean locked;
     @Column(nullable = false,columnDefinition = "TINYINT")
     private Boolean disabled;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<UserRoleEntity> roleEntityList;
+
 }

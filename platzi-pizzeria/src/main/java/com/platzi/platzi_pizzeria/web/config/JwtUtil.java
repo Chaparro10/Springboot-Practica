@@ -20,4 +20,23 @@ public class JwtUtil {
                     .withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(15)))
                     .sign(ALGORITHM);
     }
+
+    public boolean isValid(String jwt){
+        try {
+            JWT.require(ALGORITHM)
+                    .build()
+                    .verify(jwt);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getUsername(String jwt){
+        return JWT.require(ALGORITHM)
+                .build()
+                .verify(jwt)
+                .getSubject();
+    }
 }

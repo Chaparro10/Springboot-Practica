@@ -6,6 +6,7 @@ import com.platzi.platzi_pizzeria.persistence.repository.OrderRepository;
 import com.platzi.platzi_pizzeria.service.dto.RandomOrderDTO;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,6 +58,7 @@ public class OrderService {
 
     /*-------------@Query sql nativos------------*/
 
+    @Secured("ROLE_ADMIN")
     public  List<OrderEntity> getOrderByCustomer(String id){
         return this.orderRepository.findCustomerOrder(id);
     }

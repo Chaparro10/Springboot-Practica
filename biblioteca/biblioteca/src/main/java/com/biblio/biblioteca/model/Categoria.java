@@ -10,6 +10,10 @@ import java.util.List;
 
 @Entity
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "categorias")
 public class Categoria {
     @Id()
@@ -21,7 +25,7 @@ public class Categoria {
     private  String descripcion;
 
     @OneToMany(mappedBy = "categoria")
-    //@JsonIgnoreProperties("categoria")
+    @JsonIgnoreProperties("categoria")
     private List<Libro> libros;
 
 

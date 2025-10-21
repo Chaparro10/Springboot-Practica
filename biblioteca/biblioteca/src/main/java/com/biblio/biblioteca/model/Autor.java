@@ -20,7 +20,7 @@ public class Autor {
     private String nacionalidad;
 
 
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "autor",fetch = FetchType.LAZY)
     @JsonIgnoreProperties("autor")
     private List<Libro> libros;
 

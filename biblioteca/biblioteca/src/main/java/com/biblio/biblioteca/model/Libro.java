@@ -8,6 +8,10 @@ import java.util.List;
 
 @Entity
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "libros")
 public class Libro {
 
@@ -29,6 +33,7 @@ public class Libro {
     // Relación con categoría
     @ManyToOne
     @JoinColumn(name = "categoria_id")
+    @JsonIgnoreProperties("libros")
     private Categoria categoria;
 
 

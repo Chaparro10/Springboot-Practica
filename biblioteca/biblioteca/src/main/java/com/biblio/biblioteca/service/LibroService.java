@@ -17,8 +17,12 @@ import java.util.List;
 public class LibroService {
     @Autowired
     private LibroRepository libroRepository;
+    @Autowired
     private AutorRepository autorRepository;
+    @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private LibroMapper libroMapper;
 
 
     /*
@@ -34,7 +38,7 @@ public class LibroService {
 
     //Utilizando dependencia para hacer el mapeo
     public List<LibroDTO> getAll(){
-        return libroRepository.findAll().stream().map(p-> LibroMapper.mapper.libroToLibroDTO(p)).toList();
+        return libroRepository.findAll().stream().map(libroMapper::libroToLibroDTO).toList();
     }
 
     public Libro getById(Long id){
@@ -42,7 +46,18 @@ public class LibroService {
     }
 
     public void add(LibroRequestDTO libroRequestDTO){
-        Libro libro = LibroMapper.mapper.libroDtoToLibro(libroRequestDTO);
+
+        Libro libro = libroMapper.libroDtoToLibro(libroRequestDTO);
+
+        libro.setAutor(
+                autorRepository.findById(libroRequestDTO.getId_autor())
+                        .orElseThrow(() -> new RuntimeException("Autor no encontrado"))
+        );
+
+        libro.setCategoria(
+                categoriaRepository.findById(libroRequestDTO.getId_categoria())
+                        .orElseThrow(() -> new RuntimeException("Categoría no encontrada"))
+        );
         libroRepository.save(libro);
         System.out.println("Libro agregado correctamente");
     }
@@ -54,24 +69,24 @@ public class LibroService {
 
 
     //servicios para trabajar con DTO de forma manual
-    private LibroDTO convertToDTO(Libro libro) {
-        LibroDTO dto = new LibroDTO();
-        dto.setId(libro.getId());
-        dto.setTitulo(libro.getTitulo());
-        dto.setIsbn(libro.getIsbn());
-        dto.setAnioPublicacion(libro.getAnioPublicacion());
-        dto.setNombreAutor(libro.getAutor().getNombre() + " " + libro.getAutor().getApellido());
-        dto.setNombreCategoria(libro.getCategoria().getNombre());
-        return dto;
-    }
+  //  private LibroDTO convertToDTO(Libro libro) {
+//        LibroDTO dto = new LibroDTO();
+//        dto.setId(libro.getId());
+//        dto.setTitulo(libro.getTitulo());
+//        dto.setIsbn(libro.getIsbn());
+//        dto.setAnioPublicacion(libro.getAnioPublicacion());
+//        dto.setNombreAutor(libro.getAutor().getNombre() + " " + libro.getAutor().getApellido());
+//        dto.setNombreCategoria(libro.getCategoria().getNombre());
+//        return dto;
+ //   }
 
-    public Libro convertToEntity(LibroRequestDTO dto) {
-        Libro libro = new Libro();
-        libro.setTitulo(dto.getTitulo());
-        libro.setIsbn(dto.getIsbn());
-        libro.setAnioPublicacion(dto.getAnioPublicacion());
-        libro.setAutor(autorRepository.findById(dto.getId_autor()).orElseThrow());
-        libro.setCategoria(categoriaRepository.findById(dto.getId_categoria()).orElseThrow());
-        return libro;
-    }
+ //   public Libro convertToEntity(LibroRequestDTO dto) {
+//        Libro libro = new Libro();
+//        libro.setTitulo(dto.getTitulo());
+//        libro.setIsbn(dto.getIsbn());
+//        libro.setAnioPublicacion(dto.getAnioPublicacion());
+//        libro.setAutor(autorRepository.findById(dto.getId_autor()).orElseThrow());
+//        libro.setCategoria(categoriaRepository.findById(dto.getId_categoria()).orElseThrow());
+       // return libro;
+  //  }
 }

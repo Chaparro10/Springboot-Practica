@@ -8,10 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface LibroMapper {
-
-    LibroMapper mapper= Mappers.getMapper(LibroMapper.class);
 
     @Mapping(source = "autor.nombre", target = "nombreAutor")
     @Mapping(source = "categoria.nombre", target = "nombreCategoria")

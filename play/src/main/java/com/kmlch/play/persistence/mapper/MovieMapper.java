@@ -3,6 +3,7 @@ package com.kmlch.play.persistence.mapper;
 
 import com.kmlch.play.domain.dto.MovieDto;
 import com.kmlch.play.persistence.entity.MovieEntity;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -19,6 +20,11 @@ public interface MovieMapper {
     MovieDto toDto (MovieEntity movieEntity);
     List<MovieDto> toDto(List<MovieEntity> movieEntities);
 
+
+    @InheritInverseConfiguration
+    @Mapping(source = "genre",target = "genero",qualifiedByName = "genreToString")
+    @Mapping(target = "estado",ignore = true)
+    MovieEntity toEntity(MovieDto movieDto);
 
 
 }

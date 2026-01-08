@@ -32,5 +32,11 @@ public class MovieService {
         return movieMapper.toDto(this.crudMovieEntity.findById(id).orElse(null));
     }
 
+    public MovieDto save(MovieDto movieDto){
+        MovieEntity movieEntity = movieMapper.toEntity(movieDto);
+        movieEntity.setEstado("D");
+        return  movieMapper.toDto(this.crudMovieEntity.save(movieEntity));
+    }
+
 
 }

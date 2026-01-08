@@ -3,6 +3,7 @@ package com.kmlch.play.domain.services;
 
 import com.kmlch.play.domain.dto.MovieDto;
 import com.kmlch.play.domain.dto.UpdateMovieDto;
+import com.kmlch.play.domain.exception.MovieAlreadyExistsException;
 import com.kmlch.play.persistence.crud.CrudMovieEntity;
 import com.kmlch.play.persistence.entity.MovieEntity;
 import com.kmlch.play.persistence.mapper.MovieMapper;
@@ -35,6 +36,12 @@ public class MovieService {
     }
 
     public MovieDto save(MovieDto movieDto){
+
+        if(this.crudMovieEntity.findFirstByTitulo(movieDto.title()) != null){
+            throw  new MovieAlreadyExistsException(movieDto.title());
+        }
+
+
         MovieEntity movieEntity = movieMapper.toEntity(movieDto);
         movieEntity.setEstado("D");
         return  movieMapper.toDto(this.crudMovieEntity.save(movieEntity));

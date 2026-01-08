@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CrudMovieEntity extends JpaRepository<MovieEntity,Long> {
+
+    //Query method
+    MovieEntity findFirstByTitulo(String titulo);
 }

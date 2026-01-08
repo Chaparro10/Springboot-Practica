@@ -2,11 +2,12 @@ package com.kmlch.play.web.controller;
 
 
 import com.kmlch.play.domain.dto.MovieDto;
+import com.kmlch.play.domain.dto.UpdateMovieDto;
 import com.kmlch.play.domain.services.MovieService;
 import com.kmlch.play.persistence.entity.MovieEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +23,28 @@ public class MovieController {
 
 
     @GetMapping("")
-    public List<MovieDto> getAllMovies(){
-        return movieService.getAll();
+    public ResponseEntity<List<MovieDto>> getAllMovies(){
+        return ResponseEntity.ok(movieService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDto> getById(@PathVariable Long id){
+
+        MovieDto movieDto = movieService.getById(id);
+
+        if(movieDto==null){
+                return  ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(movieDto);
+    }
+
+    @PostMapping("")
+    public ResponseEntity<MovieDto> save(@RequestBody MovieDto movieDto){
+            return ResponseEntity.status (HttpStatus.CREATED).body(this.movieService.save(movieDto));
+    }
+    @PatchMapping("/change")
+    public ResponseEntity<MovieDto> update(@RequestParam Long id, @RequestBody UpdateMovieDto updateMovieDto){
+        return ResponseEntity.ok(this.movieService.update(id,updateMovieDto));
     }
 }

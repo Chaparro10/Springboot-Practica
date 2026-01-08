@@ -27,5 +27,10 @@ public class MovieService {
         return  movieMapper.toDto(this.crudMovieEntity.findAll());
     }
 
+    public MovieDto getById(Long id){
+        System.out.println(id);
+        return movieMapper.toDto(this.crudMovieEntity.findById(id).orElse(null));
+    }
+
 
 }

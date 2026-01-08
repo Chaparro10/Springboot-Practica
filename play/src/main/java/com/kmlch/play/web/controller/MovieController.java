@@ -5,6 +5,11 @@ import com.kmlch.play.domain.dto.MovieDto;
 import com.kmlch.play.domain.dto.UpdateMovieDto;
 import com.kmlch.play.domain.services.MovieService;
 import com.kmlch.play.persistence.entity.MovieEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
+@Tag(name = "Movies",description = "Operations about movies")
 public class MovieController {
 
     private final MovieService movieService;
@@ -28,8 +34,16 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getAll());
     }
 
+    @Operation(
+            summary = "Get a movie by id",
+            description ="Return movie with id send",
+            responses = {
+                    @ApiResponse(responseCode = "200",description = "Movie found"),
+                    @ApiResponse(responseCode = "404", description = "Movie not found",content = @Content)
+            }
+    )
     @GetMapping("/{id}")
-    public ResponseEntity<MovieDto> getById(@PathVariable Long id){
+    public ResponseEntity<MovieDto> getById(@Parameter(description = "identifier of movie to return",example = "9") @PathVariable Long id){
 
         MovieDto movieDto = movieService.getById(id);
 
